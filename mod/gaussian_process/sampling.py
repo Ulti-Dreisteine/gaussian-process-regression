@@ -46,8 +46,8 @@ def gpr_sampling(t_list, kernel_name, kernel_params, show_matrix_C = False):
 	"""
 	高斯过程采样
 	这部分过程和原理可以参考以下介绍高斯过程采样算法的材料:
-	https://www.jgoertler.com/visual-exploration-gaussian-processes/#GaussianProcesses
-	https://blog.csdn.net/shenxiaolu1984/article/details/50386518
+		https://www.jgoertler.com/visual-exploration-gaussian-processes/#GaussianProcesses
+		https://blog.csdn.net/shenxiaolu1984/article/details/50386518
 	:param t_list: array like, 时间值序列
 	:param kernel_name: str, 高斯过程核函数名称
 	:param kernel_params: dict, 高斯过程核函数参数

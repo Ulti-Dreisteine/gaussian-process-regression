@@ -17,29 +17,7 @@ import sys
 
 sys.path.append('../')
 
-from mod.gaussian_process.kernels import RBF_kernel, linear_kernel, periodic_kernel
-
-
-def kernel_func(x_a, x_b, kernel_name, kernel_params):
-	# 参数设置.
-	# 如果params里面有设置则使用设置, 否则默认为None.
-	for p_name in ['sigma', 'sigma_b', 'l', 'c', 'p']:
-		if p_name in kernel_params.keys():
-			pass
-		else:
-			kernel_params[p_name] = None
-		
-	if kernel_name == 'RBF':
-		k = RBF_kernel(x_a, x_b, sigma = kernel_params['sigma'], l = kernel_params['l'])
-		return k
-	elif kernel_name == 'linear':
-		k = linear_kernel(x_a, x_b, sigma = kernel_params['sigma'], sigma_b = kernel_params['sigma_b'], c = kernel_params['c'])
-		return k
-	elif kernel_name == 'periodic':
-		k = periodic_kernel(x_a, x_b, sigma = kernel_params['sigma'], l = kernel_params['l'], p = kernel_params['p'])
-		return k
-	else:
-		raise ValueError('Unknown kernel func name "{}".'.format(kernel_name))
+from mod.gaussian_process.kernels import kernel_func
 
 
 def gpr_sampling(t_list, kernel_name, kernel_params, show_matrix_C = False):

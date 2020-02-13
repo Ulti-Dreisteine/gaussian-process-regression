@@ -14,7 +14,7 @@ Created on 2020/1/30 18:04
 import numpy as np
 
 
-def RBF_kernel(x_a, x_b, sigma = None, l = None):
+def _RBF_kernel(x_a, x_b, sigma = None, l = None):
 	"""
 	RBF高斯核函数, 又名Exponetiated Quadratic, 公式为:
 	k = sigma^2 * exp(-norm(x_a - x_b)^2 / (2 * l^2))
@@ -33,7 +33,7 @@ def RBF_kernel(x_a, x_b, sigma = None, l = None):
 	return k
 
 
-def periodic_kernel(x_a, x_b, sigma = None, l = None, p = None):
+def _periodic_kernel(x_a, x_b, sigma = None, l = None, p = None):
 	"""
 	周期性核函数, 公式为:
 	k = sigma^2 * np.exp(-(2 / l^2) * sin(pi / p * |x_a - x_b|)^2)
@@ -55,7 +55,7 @@ def periodic_kernel(x_a, x_b, sigma = None, l = None, p = None):
 	return k
 
 
-def linear_kernel(x_a, x_b, sigma = None, sigma_b = None, c = None):
+def _linear_kernel(x_a, x_b, sigma = None, sigma_b = None, c = None):
 	"""
 	线性核函数, 公式为:
 	k = sigma_b^2 + sigma^2 * (x_a - c)(x_b - c)
@@ -74,6 +74,28 @@ def linear_kernel(x_a, x_b, sigma = None, sigma_b = None, c = None):
 	
 	k = pow(sigma_b, 2) + pow(sigma, 2) * (x_a - c) * (x_b - c)
 	return k
+
+
+def kernel_func(x_a, x_b, kernel_name, kernel_params):
+	# 参数设置.
+	# 如果params里面有设置则使用设置, 否则默认为None.
+	for p_name in ['sigma', 'sigma_b', 'l', 'c', 'p']:
+		if p_name in kernel_params.keys():
+			pass
+		else:
+			kernel_params[p_name] = None
+	
+	if kernel_name == 'RBF':
+		k = _RBF_kernel(x_a, x_b, sigma = kernel_params['sigma'], l = kernel_params['l'])
+		return k
+	elif kernel_name == 'linear':
+		k = _linear_kernel(x_a, x_b, sigma = kernel_params['sigma'], sigma_b = kernel_params['sigma_b'], c = kernel_params['c'])
+		return k
+	elif kernel_name == 'periodic':
+		k = _periodic_kernel(x_a, x_b, sigma = kernel_params['sigma'], l = kernel_params['l'], p = kernel_params['p'])
+		return k
+	else:
+		raise ValueError('Unknown kernel func name "{}".'.format(kernel_name))
 
 
 

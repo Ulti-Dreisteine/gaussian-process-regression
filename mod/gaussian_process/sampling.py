@@ -79,7 +79,7 @@ def gpr_sampling(t_list, kernel_name, kernel_params, show_matrix_C = False):
 	
 	# 对C进行SVD分解.
 	U, sigmas, V = np.linalg.svd(C)
-	S = np.diag(sigmas)
+	S = np.diag(sigmas)  # 向量转为对角矩阵
 	
 	# 生成N个独立同分布高斯随机变量.
 	y_list = np.random.normal(loc = 0.0, scale = 1.0, size = (N,))

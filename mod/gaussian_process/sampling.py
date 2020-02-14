@@ -11,6 +11,10 @@ Created on 2020/1/30 18:03
 @Describe: 生成高斯过程样本
 """
 
+import logging
+
+logging.basicConfig(level = logging.INFO)
+
 import seaborn as sns
 import numpy as np
 import sys

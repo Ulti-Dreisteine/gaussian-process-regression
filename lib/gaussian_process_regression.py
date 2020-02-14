@@ -18,10 +18,11 @@ logging.basicConfig(level = logging.INFO)
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
+import os
 
 sys.path.append('../')
 
-from lib import proj_cmap
+from lib import proj_dir, proj_cmap
 from mod.gaussian_process.sampling import cal_covariance_matrix, gpr_sampling
 
 
@@ -103,7 +104,9 @@ if __name__ == '__main__':
 	plt.xlim([np.min(t_list), np.max(t_list)])
 	plt.xticks(fontsize = 6)
 	plt.yticks(fontsize = 6)
-	plt.xlabel('feature dim', fontsize = 10)
+	plt.xlabel('index', fontsize = 10)
+	
+	plt.savefig(os.path.join(proj_dir, 'graph/prior_vs_posterior.png'), dpi = 450)
 	
 	
 	

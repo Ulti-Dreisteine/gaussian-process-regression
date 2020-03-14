@@ -159,5 +159,5 @@ $$
 
 下图显示了先验分布样本和后验分布样本的对比：
 
-<img src="README.assets/prior_vs_posterior.png" alt="prior_vs_posterior" style="zoom: 25%;" />
+![prior_vs_posterior](README.assets/prior_vs_posterior-4195450.png)
 

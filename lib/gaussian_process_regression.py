@@ -16,6 +16,7 @@ import logging
 logging.basicConfig(level = logging.INFO)
 
 import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
 import sys
 import os
@@ -29,12 +30,19 @@ from mod.gaussian_process.sampling import cal_covariance_matrix
 kernel_name = 'RBF'
 kernel_params = {'sigma': 0.5, 'l': 1.0, 'p': 0.5}
 
+# kernel_name = 'periodic'
+# kernel_params = {'sigma': 0.5, 'l': 1.0, 'p': 0.5}
+
+# kernel_name = 'linear'
+# kernel_params = {'sigma': 0.5, 'c': 0.5, 'sigma_b': 0.5}
+
 
 if __name__ == '__main__':
 	# 生成一批先验样本.
 	t_list = np.arange(0, 10, 0.1)
 	mu = np.zeros([len(t_list), 1])
 	C = cal_covariance_matrix(t_list, kernel_name = kernel_name, kernel_params = kernel_params)
+	sns.heatmap(C, cmap = 'Blues')
 	prior_samples = gen_gaussian_process_samples(t_list, mu, C, samples_n = 200)
 	
 	plt.figure('Gaussian Process Regression')
@@ -80,7 +88,7 @@ if __name__ == '__main__':
 	plt.xticks(fontsize = 6)
 	plt.yticks(fontsize = 6)
 	plt.xlabel('index', fontsize = 10)
-	
+
 	plt.savefig(os.path.join(proj_dir, 'graph/prior_vs_posterior.png'), dpi = 450)
 	
 	

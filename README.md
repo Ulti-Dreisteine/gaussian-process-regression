@@ -9,7 +9,7 @@
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 
-![封面](graph/prior_vs_posterior.png)
+![封面](graph/posterior.png)
 
 # 高斯过程回归
 ##  Gaussian Process Regression

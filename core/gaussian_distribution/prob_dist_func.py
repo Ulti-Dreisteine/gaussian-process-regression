@@ -14,7 +14,7 @@ Created on 2020/2/20 21:07
 import numpy as np
 
 
-def one_dim_gaussian(x, mu, sigma):
+def univar_gaussian(x, mu, sigma):
 	"""
 	一维高斯分布概率密度函数
 	:param x: float or array like, x值或向量
@@ -26,7 +26,7 @@ def one_dim_gaussian(x, mu, sigma):
 	return f
 
 
-def multi_dim_gaussian(x, mu, Sigma):
+def multivar_gaussian(x, mu, Sigma):
 	"""
 	多维高斯分布概率密度函数
 	:param x: array like, x向量
@@ -50,22 +50,28 @@ def multi_dim_gaussian(x, mu, Sigma):
 
 
 if __name__ == '__main__':
-	import logging
+	import sys
+	import os
 	
-	logging.basicConfig(level = logging.INFO)
+	BASE_DIR = os.path.abspath(os.path.join(os.path.abspath(__file__), '../' * 3))
+	sys.path.append(BASE_DIR)
 	
-	import matplotlib.pyplot as plt
+	from src.settings import plt
 	
-	# %% 一维高斯分布.
+	# ---- 一维高斯分布 -----------------------------------------------------------------------------
+	
 	mu = 0.0
 	sigma = 1.0
 	x = np.arange(-10.0, 10.0 + 0.1, 0.1).reshape(-1, 1)
-	y = one_dim_gaussian(x, mu, sigma)
+	y = univar_gaussian(x, mu, sigma)
+
 	plt.figure('One Dimensional PDF')
 	plt.plot(x, y)
 	
-	# %% 二维高斯分布.
+	# ---- 二维高斯分布 -----------------------------------------------------------------------------
+	
 	from mod.gaussian_process.sampling import cal_covariance_matrix
+	
 	mu = [3.0, 1.0]
 	idx = [0.0, 1.0]
 	kernel_name = 'RBF'
@@ -76,8 +82,9 @@ if __name__ == '__main__':
 	y = np.arange(-10.0, 10.0 + 0.2, 0.2).reshape(-1, 1)
 	mesh_x, mesh_y = np.meshgrid(x, y)
 	coords = np.dstack((mesh_x, mesh_y))
-	pdf = np.apply_along_axis(lambda x: multi_dim_gaussian(x, mu, Sigma), 2, coords)
-	pdf = pdf.reshape(len(x), len(y))  # TODO: 确认pdf中的维度与x, y维度对应
+	pdf = np.apply_along_axis(lambda x: multivar_gaussian(x, mu, Sigma), 2, coords)
+	pdf = pdf.reshape(len(x), len(y))  
+
 	plt.figure('Two Dimensional PDF')
 	plt.contourf(mesh_x, mesh_y, pdf, cmap = 'Blues')
 	

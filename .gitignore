@@ -1,7 +1,15 @@
 .idea/
 tmp/
 trash/
-.DS_Store
+.DS_Store/
 *.xml
 *.iml
 *.pyc
+
+.git/
+.vscode/
+__pycache__/
+cache/
+mod/logs/
+pkg/
+trash/

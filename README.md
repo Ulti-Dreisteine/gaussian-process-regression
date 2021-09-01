@@ -9,7 +9,7 @@
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 
-![封面](graph/posterior.png)
+![封面](img/prior_vs_posterior.png)
 
 # 高斯过程回归
 ##  Gaussian Process Regression
@@ -167,7 +167,7 @@ $$
 k = \sigma^2 \exp(-\frac{||t_a - t_b||^2}{2l^2})
 $$
 
-![RBF核](graph/rbf_kernel.png)
+![RBF核](img/rbf_kernel.png)
 
 *periodic kernel:*
 
@@ -175,7 +175,7 @@ $$
 k = \sigma^2 \exp(-\frac{2}{l^2} \sin(\frac{\pi}{p})|t_a - t_b|)
 $$
 
-![periodicF核](graph/periodic_kernel.png)
+![periodicF核](img/periodic_kernel.png)
 
 *linear_kernel:*
 
@@ -183,7 +183,7 @@ $$
 k = \sigma_b^2 + \sigma^2 * (t_a - c)(t_b - c)
 $$
 
-![linear核](graph/linear_kernel.png)
+![linear核](img/linear_kernel.png)
 
 这样当知道两个随机变量指数$t_a$和$t_b$后，便可通过核函数计算两个变量间的协方差。如果对所有随机变量均进行上述计算便可获得协方差矩阵$\Sigma$。有了协方差矩阵$\Sigma$后便可对高斯过程进行采样（一般认为高斯过程先验分布均值$\mu$应无偏为0）。
 
@@ -204,10 +204,10 @@ $$
 
 采样结果如下图所示，图中每条灰色曲线便对应一条高斯过程样本（$n=100$）,蓝色曲线表示样本均值，因为我们设定先验分布各维度上均值$\mu_i=0$，所以蓝色曲线在0附近波动。
 
-![高斯郭晨采样](graph/gaussian_process_samples.png)
+![高斯过程采样](img/gaussian_process_samples.png)
 
 
 ***3.3 后验分布和采样***  
 3.2中获得的高斯过程样本为先验样本。但是当我们在某些指数$t$上获得了一批观测样本后，这批观测样本将有助于我们对其他指数集上的样本分布进行估计（后验）。我们将这批已观测指数集设为$X_1$，未观测到的指数集设为$X_2$。接下来便可使用第二节中的方法获得在$X_2$上样本分布后验概率参数$\mu_{2|1}$和$\Sigma_{2|1}$，最后重新对$X_2$上的随机变量进行采样。下图显示了后验分布样本：
 
-![](graph/posterior.png)
+![](img/posterior.png)

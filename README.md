@@ -69,7 +69,7 @@ $$
 ***1.2 二元高斯分布***
 
 $$
-f(x,y) = A \exp (-(\frac{x - x_0)^2}{2\sigma_x^2} + \frac{(y - y_0)^2}{2\sigma_y^2}))
+f(x,y) = A \exp (-(\frac{(x - x_0)^2}{2\sigma_x^2} + \frac{(y - y_0)^2}{2\sigma_y^2}))
 $$
 
 ***1.3 多元高斯分布***
